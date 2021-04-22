@@ -1,0 +1,109 @@
+#:kivy 1.0
+
+<CustomWidthTab@TabbedPanelItem>:
+    width: self.texture_size[0]
+    padding: 10, 10
+    size_hint_x: None
+
+<WrapLabel@Label>:
+    text_size: self.width, None
+    padding: 10, 10
+
+
+<Notification@Popup>:
+    auto_dismiss: True
+    size_hint_x: .5
+    size_hint_y: .5
+    title : 'Information'
+    BoxLayout:
+        orientation: 'vertical'
+        WrapLabel:
+            size_hint_y: 5
+            id : text
+        Button:
+            text: 'Close'
+            on_release: root.dismiss()
+
+
+<UploadRow@BoxLayout>:
+    orientation: 'horizontal'
+    WrapLabel:
+        text: "Path: "
+
+    WrapLabel:
+        id : uploadrowlabel
+        size_hint_x : 8
+        text: 'C:\\Path'
+        text_size: self.width, None
+
+
+<DataProcessing@TabbedPanel>:
+    do_default_tab: False
+    tab_width: None
+
+    CustomWidthTab:
+        id : stationarycheck
+        text: 'Stationary Check'
+        StationaryCheck
+
+    CustomWidthTab:
+        id : integerconversion
+        text: 'Integer Conversion'
+        IntegerConversion
+
+<StationaryCheck@BoxLayout>:
+    orientation: 'horizontal'
+    id : stationarycheck
+    WrapLabel:
+        id : stationarychecklabel
+        size_hint_x: 12
+        text: "Use this module to check for Stationary. ADF will be run all each variables and in the event that one of the variables are non-stationary, Johensen test will be used to test the system's stationary"
+
+    BoxLayout:
+        size_hint_x: 2
+        orientation: 'vertical'
+        id : stationarycheckinput
+
+
+<IntegerConversion@BoxLayout>:
+    orientation: 'horizontal'
+    WrapLabel:
+        id : integerconversionlabel
+        size_hint_x: 6
+        text: 'Use this module to convert all your data to integers'
+    BoxLayout:
+        size_hint_x: 3
+        orientation: 'vertical'
+        id : integerconversioninput
+
+<MultivariateTE@BoxLayout>:
+    orientation: 'horizontal'
+    BoxLayout:
+        id : multivariatete
+        orientation: 'vertical'
+    BoxLayout:
+        id : graph
+        orientation: 'vertical'
+        size_hint_x : 4
+
+<RelationshipCheck@TabbedPanel>:
+    do_default_tab: False
+    tab_width: None
+    CustomWidthTab:
+        id : multivariatete
+        text: "Multivariate TE"
+        MultivariateTE
+
+<MainGUI@BoxLayout>:
+    orientation: 'vertical'
+    padding: 20
+    UploadRow:
+        id : dataupload
+        size_hint_y : 1
+    DataProcessing:
+        id: dataprocessing
+        size_hint_y : 2
+
+    RelationshipCheck:
+        id: relationshipcheck
+        size_hint_y : 10
